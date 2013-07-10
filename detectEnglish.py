@@ -13,7 +13,7 @@
 # words in it, ome word per line. You can download this from http://invpy.com/dictionary.txt)
 
 UPPERLETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-LETTERS_AND_SPACE = UPPERLETTERS + UPPERLETTERS.lower() + '\t\n'
+LETTERS_AND_SPACE = UPPERLETTERS + UPPERLETTERS.lower() + ' \t\n'
 
 def loadDictionary():
     dictionaryFile = open('dictionary.txt')
@@ -23,9 +23,9 @@ def loadDictionary():
     dictionaryFile.close()
     return englishWords
 
-ENLGLISH_WORDS = loadDictionary()
+ENGLISH_WORDS = loadDictionary()
 
-def getEnglishCount(messsage):
+def getEnglishCount(message):
     message = message.upper()
     message = removeNonLetters(message)
     possibleWords = message.split()
@@ -46,14 +46,14 @@ def removeNonLetters(message):
             lettersOnly.append(symbol)
     return ''.join(lettersOnly)
 
-def isEnglish(message, wordPercentage=20, letterPercantage=85):
+def isEnglish(message, wordPercentage=20, letterPercentage=85):
     # By default, 20% of the words must exist in the dictionary file, and
     # 85% of all the characters in the message must be letters or spaces
     # (not punctuation or numbers).
     wordsMatch = getEnglishCount(message) * 100 >= wordPercentage
     numLetters = len(removeNonLetters(message))
     messageLettersPercentage = float(numLetters) / len(message) * 100
-    lettersMatch = messageLettersPercentage >= letterPercantage
+    lettersMatch = messageLettersPercentage >= letterPercentage
     return wordsMatch and lettersMatch
 
     
